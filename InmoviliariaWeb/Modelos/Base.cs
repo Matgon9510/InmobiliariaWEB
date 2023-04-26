@@ -8,6 +8,5 @@ namespace InmoviliariaWeb.Modelos
     public class Base
     {
         public string Comando { get; set; }
-        public string Error { get; set; }
     }
 }

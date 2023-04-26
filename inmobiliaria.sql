@@ -296,9 +296,33 @@ INSERT INTO [dbo].[TiposContrato]
 		   (2,'Venta')
 GO
 
-select * from Propiedades
+---Tipo Tipo Telefonono----
+
+USE [DBInmobiliaria]
+GO
+
+INSERT INTO [dbo].[Tipo_Tel]
+           ([id_tipo_tel]
+           ,[descripcion])
+     VALUES
+           (1,'Fijo'),
+		   (2,'Celular')
+GO
+
+---Genero----
+
+USE [DBInmobiliaria]
+GO
+
+INSERT INTO [dbo].[Genero]
+           ([genero]
+           ,[descripcion])
+     VALUES
+           (1,'Masculino'),
+		   (2,'Femenino'),
+		   (3,'Otro')
+GO
 
 
 
-
-
+select * from propiedades

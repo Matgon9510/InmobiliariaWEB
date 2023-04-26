@@ -64,7 +64,6 @@ function EjecutarComando(Comando) {
         comision: comision,
         precio_final: 0,
         Comando: Comando,
-        Error: ""
     }
     $.ajax({
         type: "POST",
@@ -257,7 +256,6 @@ function LlenarTablaPropiedades() {
         comision: 0,
         precio_final: 0,
         Comando: "LlenarGrid",
-        Error: ""
     }
     $.ajax({
         type: "POST",

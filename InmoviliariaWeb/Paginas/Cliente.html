@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gestión de clientes</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link href="Estilos/all.min.css" rel="stylesheet" />
+    <!-- Theme style -->
+    <link href="Estilos/adminlte.min.css" rel="stylesheet" />
+</head>
+<body class="hold-transition sidebar-mini">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- left column -->
+                <div class="col-md-12">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">GESTIÓN DE CLIENTES</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        <form id="frmClientes">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="txtIdCliente">Id Cliente</label>
+                                            <input type="text" class="form-control" id="txtIdCliente" placeholder="Id Cliente">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="txtNombre">Nombre</label>
+                                            <input type="text" class="form-control" id="txtNombre" placeholder="Nombre">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="txtApellido">Apellido</label>
+                                            <input type="text" class="form-control" id="txtApellido" placeholder="Apellido">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label for="txtEmail">Email</label>
+                                            <input type="email" class="form-control" id="txtEmail" placeholder="Email">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1.5">
+                                        <div class="form-group">
+                                            <label for="cboTipoTel">Tipo Teléfono</label>
+                                            <select id="cboTipoTel" class="form-control">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="txtTelefono">Teléfono</label>
+                                            <input type="text" class="form-control" id="txtTelefono" placeholder="Teléfono">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label for="cboGenero">Género</label>
+                                            <select id="cboGenero" class="form-control"></select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="txtDireccion">Direccion</label>
+                                            <input type="text" class="form-control" id="txtDireccion" placeholder="Direccion">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="cboCiudad">Ciudad</label>
+                                            <select id="cboCiudad" class="form-control">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group"></div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-primary" id="btnIngresar">Ingresar</button>
+                                            <button type="button" class="btn btn-success" id="btnActualizar">Actualizar</button>
+                                            <button type="button" class="btn btn-danger" id="btnEliminar">Eliminar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card-body">
+                                            <div class="table-responsive">
+                                                <table id="tblClientes" class="table table-bordered table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Código</th>
+                                                            <th>Nombre</th>
+                                                            <th>Apellido</th>
+                                                            <th>Email</th>
+                                                            <th>TpTeléfono</th>
+                                                            <th>Teléfono</th>
+                                                            <th>Género</th>
+                                                            <th>Dirección</th>
+                                                            <th>Ciudad</th>
+                                                            <th>Comando</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="reset" class="btn btn-warning">Regresar</button>
+                                <div id="dvMensaje" class=""></div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!--/.col (left) -->
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+    <!-- /.content-wrapper -->
+    <!-- jQuery -->
+
+    <script src="../Scripts/jquery.min.js"></script>
+    <script src="Scripts/bootstrap.bundle.min.js"></script>
+    <script src="../Scripts/jquery.dataTables.min.js"></script>
+    <script src="../Scripts/dataTables.bootstrap4.min.js"></script>
+    <script src="Scripts/Grids.js"></script>
+    <script src="Scripts/adminlte.min.js"></script>
+    <script src="Scripts/Cliente.js"></script>
+</body>
+</html>
+
