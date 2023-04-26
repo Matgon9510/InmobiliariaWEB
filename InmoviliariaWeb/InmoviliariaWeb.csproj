@@ -175,6 +175,10 @@
     <Content Include="Paginas\Estilos\dataTables.bootstrap4.min.css" />
     <Content Include="Paginas\Estilos\dataTables.min.css" />
     <Content Include="Paginas\Estilos\styles.css" />
+    <Content Include="Paginas\HtmlPage1.html" />
+    <Content Include="Paginas\Imagenes\IMG_1.jpg" />
+    <Content Include="Paginas\Imagenes\IMG_2.jpg" />
+    <Content Include="Paginas\Imagenes\IMG_3.jpg" />
     <Content Include="Paginas\PropiedadesWeb.html" />
     <Content Include="Paginas\Scripts\Cliente.js" />
     <Content Include="Paginas\Scripts\Empleados.js" />

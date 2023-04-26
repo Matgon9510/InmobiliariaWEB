@@ -323,6 +323,33 @@ INSERT INTO [dbo].[Genero]
 		   (3,'Otro')
 GO
 
+---Sede----
+
+USE [DBInmobiliaria]
+GO
+
+INSERT INTO [dbo].[Sede]
+           ([id_Sede]
+           ,[descripcion])
+     VALUES
+           (1,'Poblado'),
+		   (2,'San juan'),
+		   (3,'Llano Grande')
+GO
 
 
-select * from propiedades
+---Cargo----
+USE [DBInmobiliaria]
+GO
+
+INSERT INTO [dbo].[Cargo]
+           ([id_cargo]
+           ,[descripcion])
+     VALUES
+           (1,'Asesor'),
+		   (2,'Vendedor'),
+		   (3,'Gerente')
+GO
+
+
+select * from Clientes
