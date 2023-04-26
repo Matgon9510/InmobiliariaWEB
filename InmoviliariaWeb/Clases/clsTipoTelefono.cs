@@ -1,18 +1,18 @@
-﻿using System;
+﻿using InmoviliariaWeb.Modelos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using InmoviliariaWeb.Modelos;
 
 namespace InmoviliariaWeb.Clases
 {
-    public class clsTipocontrato
+    public class clsTipoTelefono
     {
         private DBInmobiliariaEntities dbSuper = new DBInmobiliariaEntities();
-        public List<TiposContrato> LlenarCombo()
+        public List<Tipo_Tel> LlenarCombo()
         {
-            return dbSuper.TiposContratoes
-                .OrderBy(p => p.nombre)
+            return dbSuper.Tipo_Tel
+                .OrderBy(p => p.descripcion)
                 .ToList();
         }
     }

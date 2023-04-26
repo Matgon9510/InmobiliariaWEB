@@ -1,16 +1,18 @@
-﻿using InmoviliariaWeb.Clases;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using InmoviliariaWeb.Modelos;
+using InmoviliariaWeb.Clases;
+using Newtonsoft.Json;
+using System.IO;
 namespace InmoviliariaWeb.Controladores
 {
     /// <summary>
-    /// Descripción breve de ControladorTipoContrato
+    /// Descripción breve de ControladorCargo
     /// </summary>
-    public class ControladorTipoContrato : IHttpHandler
+    public class ControladorCargo : IHttpHandler
     {
 
         public void ProcessRequest(HttpContext context)
@@ -20,11 +22,10 @@ namespace InmoviliariaWeb.Controladores
         }
         private string Procesar()
         {
-            clsTipocontrato Tipocontrato = new clsTipocontrato();
+            clsCargo cargo = new clsCargo();
 
-            return JsonConvert.SerializeObject(Tipocontrato.LlenarCombo());
+            return JsonConvert.SerializeObject(cargo.LlenarCombo());
         }
-
         public bool IsReusable
         {
             get

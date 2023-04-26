@@ -6,13 +6,13 @@ using InmoviliariaWeb.Modelos;
 
 namespace InmoviliariaWeb.Clases
 {
-    public class clsTipocontrato
+    public class clsCargo
     {
         private DBInmobiliariaEntities dbSuper = new DBInmobiliariaEntities();
-        public List<TiposContrato> LlenarCombo()
+        public List <Cargo> LlenarCombo()
         {
-            return dbSuper.TiposContratoes
-                .OrderBy(p => p.nombre)
+            return dbSuper.Cargoes
+                .OrderBy(p => p.descripcion )
                 .ToList();
         }
     }

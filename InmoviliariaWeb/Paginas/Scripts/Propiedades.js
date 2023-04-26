@@ -222,7 +222,7 @@ function LlenarComboEstado() {
 function LlenarComboTipoContrato() {
     $.ajax({
         type: "POST",
-        url: "../Controladores/ControladorTipoContrato.ashx",
+        url: "../Controladores/ControladorTipoContratoProp.ashx",
         contentType: "json",
         data: null,
         success: function (rpta) {

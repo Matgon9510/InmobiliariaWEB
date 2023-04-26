@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
+
 namespace InmoviliariaWeb.Controladores
 {
     /// <summary>
-    /// Descripción breve de ControladorTipoContrato
+    /// Descripción breve de ControladorSede
     /// </summary>
-    public class ControladorTipoContrato : IHttpHandler
+    public class ControladorSede : IHttpHandler
     {
 
         public void ProcessRequest(HttpContext context)
@@ -20,9 +21,9 @@ namespace InmoviliariaWeb.Controladores
         }
         private string Procesar()
         {
-            clsTipocontrato Tipocontrato = new clsTipocontrato();
+            clsSede sede = new clsSede();
 
-            return JsonConvert.SerializeObject(Tipocontrato.LlenarCombo());
+            return JsonConvert.SerializeObject(sede.LlenarCombo());
         }
 
         public bool IsReusable

@@ -6,14 +6,12 @@ using InmoviliariaWeb.Modelos;
 
 namespace InmoviliariaWeb.Clases
 {
-    public class clsTipocontrato
+    public class clsTipoContratoProp
     {
-        private DBInmobiliariaEntities dbSuper = new DBInmobiliariaEntities();
+        DBInmobiliariaEntities dbInmobiliaria = new DBInmobiliariaEntities();
         public List<TiposContrato> LlenarCombo()
         {
-            return dbSuper.TiposContratoes
-                .OrderBy(p => p.nombre)
-                .ToList();
+            return dbInmobiliaria.TiposContratoes.OrderBy(p => p.nombre).ToList();
         }
     }
 }

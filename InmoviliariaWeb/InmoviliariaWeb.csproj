@@ -144,11 +144,17 @@
     <Content Include="Controladores\ControladorCiudad.ashx" />
     <Content Include="Controladores\ControladorDepartamento.ashx" />
     <Content Include="Controladores\ControladorTipoPropiedad.ashx" />
-    <Content Include="Controladores\ControladorTipoContrato.ashx" />
+    <Content Include="Controladores\ControladorTipoContratoProp.ashx" />
     <Content Include="Controladores\ControladorEstacionamiento.ashx" />
     <Content Include="Controladores\ControladorEstado.ashx" />
     <Content Include="Controladores\ControladorClientes.ashx" />
     <Content Include="Controladores\ControladorUtils.ashx" />
+    <Content Include="Controladores\ControladorCargo.ashx" />
+    <Content Include="Controladores\ControladorEmpleado.ashx" />
+    <Content Include="Controladores\ControladorGenero.ashx" />
+    <Content Include="Controladores\ControladorSede.ashx" />
+    <Content Include="Controladores\ControladorTipoContrato.ashx" />
+    <Content Include="Controladores\ControladorTipoTelefono.ashx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Modelos\DBinmobiliaria.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -161,6 +167,7 @@
       <LastGenOutput>DBinmobiliaria.cs</LastGenOutput>
     </Content>
     <Content Include="Paginas\Cliente.html" />
+    <Content Include="Paginas\Empleados.html" />
     <Content Include="Paginas\Estilos\adminlte.css" />
     <Content Include="Paginas\Estilos\adminlte.min.css" />
     <Content Include="Paginas\Estilos\all.min.css" />
@@ -170,6 +177,7 @@
     <Content Include="Paginas\Estilos\styles.css" />
     <Content Include="Paginas\PropiedadesWeb.html" />
     <Content Include="Paginas\Scripts\Cliente.js" />
+    <Content Include="Paginas\Scripts\Empleados.js" />
     <Content Include="Paginas\Scripts\Grids.js" />
     <Content Include="Paginas\Scripts\Propiedades.js" />
     <Content Include="Scripts\adminlte.js" />
@@ -224,15 +232,21 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Clases\clsCargo.cs" />
     <Compile Include="Clases\clsCiudad.cs" />
     <Compile Include="Clases\clsCliente.cs" />
     <Compile Include="Clases\clsCombosPropiedad.cs" />
     <Compile Include="Clases\clsDepartamento.cs" />
+    <Compile Include="Clases\clsEmpleado.cs" />
     <Compile Include="Clases\clsEstacionamiento.cs" />
     <Compile Include="Clases\clsEstado.cs" />
+    <Compile Include="Clases\clsGenero.cs" />
     <Compile Include="Clases\clsPropiedad.cs" />
-    <Compile Include="Clases\clsTipoContrato.cs" />
+    <Compile Include="Clases\clsSede.cs" />
+    <Compile Include="Clases\clsTipocontrato.cs" />
+    <Compile Include="Clases\clsTipoContratoProp.cs" />
     <Compile Include="Clases\clsTipoPropiedad.cs" />
+    <Compile Include="Clases\clsTipoTelefono.cs" />
     <Compile Include="Clases\clsUtils.cs" />
     <Compile Include="Contact.aspx.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
@@ -240,6 +254,9 @@
     </Compile>
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controladores\ControladorCargo.ashx.cs">
+      <DependentUpon>ControladorCargo.ashx</DependentUpon>
     </Compile>
     <Compile Include="Controladores\ControladorCiudad.ashx.cs">
       <DependentUpon>ControladorCiudad.ashx</DependentUpon>
@@ -253,20 +270,35 @@
     <Compile Include="Controladores\ControladorDepartamento.ashx.cs">
       <DependentUpon>ControladorDepartamento.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Controladores\ControladorEmpleado.ashx.cs">
+      <DependentUpon>ControladorEmpleado.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Controladores\ControladorEstacionamiento.ashx.cs">
       <DependentUpon>ControladorEstacionamiento.ashx</DependentUpon>
     </Compile>
     <Compile Include="Controladores\ControladorEstado.ashx.cs">
       <DependentUpon>ControladorEstado.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Controladores\ControladorGenero.ashx.cs">
+      <DependentUpon>ControladorGenero.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Controladores\ControladorPropiedad.ashx.cs">
       <DependentUpon>ControladorPropiedad.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Controladores\ControladorSede.ashx.cs">
+      <DependentUpon>ControladorSede.ashx</DependentUpon>
     </Compile>
     <Compile Include="Controladores\ControladorTipoContrato.ashx.cs">
       <DependentUpon>ControladorTipoContrato.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Controladores\ControladorTipoContratoProp.ashx.cs">
+      <DependentUpon>ControladorTipoContratoProp.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Controladores\ControladorTipoPropiedad.ashx.cs">
       <DependentUpon>ControladorTipoPropiedad.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Controladores\ControladorTipoTelefono.ashx.cs">
+      <DependentUpon>ControladorTipoTelefono.ashx</DependentUpon>
     </Compile>
     <Compile Include="Controladores\ControladorUtils.ashx.cs">
       <DependentUpon>ControladorUtils.ashx</DependentUpon>
@@ -342,6 +374,7 @@
     <Compile Include="Modelos\Tipo_Tel.cs">
       <DependentUpon>DBinmobiliaria.tt</DependentUpon>
     </Compile>
+    <Compile Include="Modelos\ViewGridEmpleado.cs" />
     <Compile Include="Modelos\viewGridPropiedades.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

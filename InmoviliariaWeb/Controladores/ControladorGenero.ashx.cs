@@ -8,9 +8,9 @@ using System.Web;
 namespace InmoviliariaWeb.Controladores
 {
     /// <summary>
-    /// Descripción breve de ControladorTipoContrato
+    /// Descripción breve de ControladorGenero
     /// </summary>
-    public class ControladorTipoContrato : IHttpHandler
+    public class ControladorGenero : IHttpHandler
     {
 
         public void ProcessRequest(HttpContext context)
@@ -20,9 +20,9 @@ namespace InmoviliariaWeb.Controladores
         }
         private string Procesar()
         {
-            clsTipocontrato Tipocontrato = new clsTipocontrato();
+            clsGenero genero = new clsGenero();
 
-            return JsonConvert.SerializeObject(Tipocontrato.LlenarCombo());
+            return JsonConvert.SerializeObject(genero.LlenarCombo());
         }
 
         public bool IsReusable
