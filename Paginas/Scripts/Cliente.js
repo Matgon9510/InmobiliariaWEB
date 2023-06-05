@@ -1,5 +1,8 @@
 ﻿var oTabla = $("#tblClientes").DataTable();
 $(document).ready(function () {
+    $('#btnBuscar').click(function () {
+        Consultar();
+    });
     $('#tblClientes tbody').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
@@ -23,6 +26,31 @@ $(document).ready(function () {
     //Invoca el llenado de la tabla
     LlenarTablaClientes();
 });
+
+function Consultar() {
+    //invoca el servicion
+    let idCliente = $("#txtIdCliente").val();
+    alert(idCliente)
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:51789//api/Cliente?idCliente=" + idCliente,
+        contentType: "json",
+        data: null,
+        dataType: "json",
+        success: function (rpta) {
+            $("#txtNombre").val(rpta.nombre);
+            $("#txtApellido").val(rpta.apellido);
+            $("#txtEmail").val(rpta.email);
+            $("#cboGenero").val(rpta.genero);
+            $("#txtDireccion").val(rpta.direccion);
+            $("#cboCiudad").val(rpta.ciudad);
+        },
+        error: function (errRpta) {
+            $("#dvMensaje").addClass("alert alert-danger");
+            $("#dvMensaje").html(errRpta);
+        }
+    });
+}
 
 function EjecutarComando(Comando) {
     let id_cliente = $("#txtIdCliente").val();
