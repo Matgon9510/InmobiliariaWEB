@@ -13,7 +13,7 @@ $(document).ready(function () {
         }
     });
     $("#btnIngresar").click(function () {
-        EjecutarComando("Insertar");
+        EjecutarComando("Post");
     });
    $("#btnActualizar").click(function () {
         EjecutarComando("Actualizar");
@@ -53,6 +53,7 @@ function Consultar() {
 }
 
 function EjecutarComando(Comando) {
+    event.preventDefault();
     let id_cliente = $("#txtIdCliente").val();
     let nombre = $("#txtNombre").val();
     let apellido = $("#txtApellido").val();
@@ -75,6 +76,22 @@ function EjecutarComando(Comando) {
         Comando: Comando,
     }
     $.ajax({
+        type: Comando,
+        url: "http://localhost:51789//api/Cliente",
+        contentType: "application/json",
+        data: JSON.stringify(DatosCliente),
+        dataType: "json",
+        success: function (Rpta) {
+            LlenarTablaClientes();
+        },
+        error: function (Error) {
+            $("#dvMensaje").addClass("alert alert-danger");
+            $("#dvMensaje").html(Error);
+        }
+      
+    });
+
+    /*$.ajax({
         type: "POST",
         url: "../Controladores/ControladorClientes.ashx",
         contentType: "json",
@@ -93,7 +110,7 @@ function EjecutarComando(Comando) {
             $("#dvMensaje").addClass("alert alert-danger");
             $("#dvMensaje").html(errRpta);
         }
-    });
+    });*/
 }
 
 function EditarFila(DatosFila) {
