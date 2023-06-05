@@ -1,5 +1,8 @@
 ﻿var oTabla = $("#tblPropiedades").DataTable();
 $(document).ready(function () {
+    $('#btnBuscar').click(function () {
+        Consultar();
+    });
     $('#tblPropiedades tbody').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
@@ -36,6 +39,38 @@ $(document).ready(function () {
     LlenarTablaPropiedades();
 
 });
+
+function Consultar() {
+    //invoca el servicion
+    let idPropiedad = $("#txtid_propiedad").val();
+    alert(idPropiedad)
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:51789//api/Propiedad?idPropiedad=" + idPropiedad,
+        contentType: "json",
+        data: null,
+        dataType: "json",
+        success: function (rpta) {
+            $("#txtDireccion").val(rpta.direccion);
+            $("#cboCiudad").val(rpta.ciudad);
+            $("#cboDepartamento").val(rpta.departamento);
+            $("#cboTipoPropiedad").val(rpta.tipo_propiedad);
+            $("#txtNumHabitaciones").val(rpta.num_habitaciones);
+            $("#txtNumBanos").val(rpta.num_banos);
+            $("#cboEstacionamiento").val(rpta.estacionamiento);
+            $("#cboEstado").val(rpta.estado);
+            $("#cboTipoContrato").val(rpta.tipo_contrato);
+            $("#txtPrecioInicial").val(rpta.precio_inicial);
+            $("#cboComision").val(rpta.comision);
+            $("#txtPrecioFinal").val(rpta.precio_final);
+        },
+        error: function (errRpta) {
+            $("#dvMensaje").addClass("alert alert-danger");
+            $("#dvMensaje").html(errRpta);
+        }
+    });
+}
+
 function EjecutarComando(Comando) {
     let id_propiedad = $("#txtid_propiedad").val();
     let direccion = $("#txtDireccion").val();

@@ -88,8 +88,6 @@ function EjecutarComando(Comando) {
                 $("#dvMensaje").html(rpta);
                 LlenarTablaClientes();
             }
-
-           
         },
         error: function (errRpta) {
             $("#dvMensaje").addClass("alert alert-danger");
@@ -126,11 +124,9 @@ function LlenarComboUtils() {
             DatosComboCiudad.forEach(op => {
                 $("#cboCiudad").append(`<option value=${op.id_ciudad}>${op.descripcion}</option>`);
             });+
-
             DatosComboGenero.forEach(op => {
                 $("#cboGenero").append(`<option value=${op.genero1}>${op.descripcion}</option>`);
             });
-
             DatosComboTpTelefono.forEach(op => {
                 $("#cboTipoTel").append(`<option value=${op.id_tipo_tel}>${op.descripcion}</option>`);
             });

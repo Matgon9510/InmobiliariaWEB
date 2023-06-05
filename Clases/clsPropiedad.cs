@@ -59,8 +59,8 @@ namespace InmoviliariaWeb.Clases
             propiedad_Actual.estado = propiedades.estado;
             propiedad_Actual.tipo_contrato = propiedades.tipo_contrato;
             propiedad_Actual.precio_inicial = propiedades.precio_inicial;
-            propiedad_Actual.comision = propiedades.comision;
             CalcularValorFinal();
+            propiedad_Actual.comision = propiedades.comision;
             propiedad_Actual.precio_final = propiedades.precio_final;
 
             
@@ -81,21 +81,25 @@ namespace InmoviliariaWeb.Clases
         private void CalcularValorFinal()
         {
             double ValorUnitario;
-            if (propiedades.comision == 1)
+            if (propiedades.precio_inicial <= 800000)
             {
+                propiedades.comision = 1;
                 ValorUnitario = 0.05;
             }
             else
             {
-                if (propiedades.comision == 2)
+                if (propiedades.precio_inicial > 800000 && propiedades.precio_inicial <= 1500000 )
                 {
+                    propiedades.comision = 2;
                     ValorUnitario = 0.1;
                 }
                 else
                 {
+                    propiedades.comision = 3;
                     ValorUnitario = 0.15;
                 }
             }
+
             propiedades.precio_final = Convert.ToInt32((propiedades.precio_inicial * ValorUnitario) + propiedades.precio_inicial);
         }
 
