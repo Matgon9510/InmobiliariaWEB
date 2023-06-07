@@ -51,8 +51,6 @@ namespace InmoviliariaWeb.Clases
                 _cliente.nombre = cliente.nombre;
                 _cliente.apellido = cliente.apellido;
                 _cliente.email = cliente.email;
-                _cliente.tipo_tel = cliente.tipo_tel;
-                _cliente.telefono = cliente.telefono;
                 _cliente.genero = cliente.genero;
                 _cliente.direccion = cliente.direccion;
                 _cliente.ciudad = cliente.ciudad;

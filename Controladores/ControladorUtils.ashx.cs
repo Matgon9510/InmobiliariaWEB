@@ -16,16 +16,16 @@ namespace InmoviliariaWeb.Controladores
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
-            context.Response.Write(LlenarComboTpTelefono());
-            context.Response.Write(LlenarComboGenero());
-            context.Response.Write(LlenarComboCiudad());
+            //context.Response.Write(LlenarComboTpTelefono());
+            //context.Response.Write(LlenarComboGenero());
+            //context.Response.Write(LlenarComboCiudad());
         }
 
-        private string LlenarComboTpTelefono()
+      /*  private string LlenarComboTpTelefono()
         {
             clsUtils tipi_telefono = new clsUtils();
             return JsonConvert.SerializeObject(tipi_telefono.LlenarComboTpTelefono());
-        }
+        }*/
 
         private string LlenarComboGenero()
         {

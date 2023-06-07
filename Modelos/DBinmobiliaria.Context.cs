@@ -37,6 +37,8 @@ namespace InmoviliariaWeb.Modelos
         public virtual DbSet<Genero> Generoes { get; set; }
         public virtual DbSet<Propiedade> Propiedades { get; set; }
         public virtual DbSet<Sede> Sedes { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Telefono> Telefonoes { get; set; }
         public virtual DbSet<Tipo_Tel> Tipo_Tel { get; set; }
         public virtual DbSet<TiposContrato> TiposContratoes { get; set; }
         public virtual DbSet<TiposPropiedad> TiposPropiedads { get; set; }

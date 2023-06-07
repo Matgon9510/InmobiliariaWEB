@@ -14,7 +14,17 @@ namespace InmoviliariaWeb.Modelos
     
     public partial class Tipo_Tel
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Tipo_Tel()
+        {
+            this.Telefonoes = new HashSet<Telefono>();
+        }
+    
         public int id_tipo_tel { get; set; }
         public string descripcion { get; set; }
+        public bool activo { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Telefono> Telefonoes { get; set; }
     }
 }

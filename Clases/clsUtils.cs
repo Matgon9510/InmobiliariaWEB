@@ -8,11 +8,6 @@ namespace InmoviliariaWeb.Clases
 {
     public class clsUtils
     {
-        DBInmobiliariaEntities dBInmobiliariaTipoTelefono = new DBInmobiliariaEntities();
-        public List<Tipo_Tel> LlenarComboTpTelefono()
-        {
-            return dBInmobiliariaTipoTelefono.Tipo_Tel.OrderBy(p => p.descripcion).ToList();
-        }
 
         DBInmobiliariaEntities dBInmobiliariaGenero = new DBInmobiliariaEntities();
         public List<Genero> LlenarComboGenero()

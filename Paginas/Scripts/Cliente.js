@@ -1,5 +1,6 @@
 ﻿var oTabla = $("#tblClientes").DataTable();
 $(document).ready(function () {
+    $("#btnTelefonos").prop('disabled', true);
     $('#btnBuscar').click(function () {
         Consultar();
     });
@@ -21,10 +22,20 @@ $(document).ready(function () {
     $("#btnEliminar").click(function () {
         EjecutarComando("Eliminar");
     });
+    $("#btnTelefonos").click(function () {
+        //Invoca la página modal, y pasa el nombre del cliente
+        $("#txtNombre").val($("#txtApellido").val())
+        //Invoca la tabla para llenar los teléfonos del cliente
+        //LlenarTablaTelefonos();
+    });
     //Invocar el llenado del combo
-    LlenarComboUtils();
+    //LlenarComboUtils();
     //Invoca el llenado de la tabla
     LlenarTablaClientes();
+    //Llenar el combo Ciudad
+    LlenarComboCiudad();
+    //Llenar el combo Genero
+    LlenarComboGenero();
 });
 
 function Consultar() {
@@ -58,8 +69,6 @@ function EjecutarComando(Comando) {
     let nombre = $("#txtNombre").val();
     let apellido = $("#txtApellido").val();
     let email = $("#txtEmail").val();
-    let tipo_tel = $("#cboTipoTel").val();
-    let telefono = $("#txtTelefono").val();
     let genero = $("#cboGenero").val();
     let direccion = $("#txtDireccion").val();
     let ciudad = $("#cboCiudad").val();
@@ -68,8 +77,6 @@ function EjecutarComando(Comando) {
         nombre: nombre,
         apellido: apellido,
         email: email,
-        tipo_tel: tipo_tel,
-        telefono: telefono,
         genero: genero,
         direccion: direccion,
         ciudad: ciudad,
@@ -91,97 +98,30 @@ function EjecutarComando(Comando) {
       
     });
 
-    /*$.ajax({
-        type: "POST",
-        url: "../Controladores/ControladorClientes.ashx",
-        contentType: "json",
-        data: JSON.stringify(DatosCliente),
-        success: function (rpta) {
-            if (rpta.includes("Error:")) {
-                $("#dvMensaje").addClass("alert alert-danger");
-                $("#dvMensaje").html(rpta);
-            } else {
-                $("#dvMensaje").addClass("alert alert-success");
-                $("#dvMensaje").html(rpta);
-                LlenarTablaClientes();
-            }
-        },
-        error: function (errRpta) {
-            $("#dvMensaje").addClass("alert alert-danger");
-            $("#dvMensaje").html(errRpta);
-        }
-    });*/
+
 }
 
 function EditarFila(DatosFila) {
-    $("#txtIdCliente").val(DatosFila.find('td:eq(0)').text());
-    $("#txtNombre").val(DatosFila.find('td:eq(1)').text());
-    $("#txtApellido").val(DatosFila.find('td:eq(2)').text());
-    $("#txtEmail").val(DatosFila.find('td:eq(3)').text());
-    $("#cboTipoTel").val(DatosFila.find('td:eq(4)').text());
-    $("#txtTelefono").val(DatosFila.find('td:eq(5)').text());
-    $("#cboGenero").val(DatosFila.find('td:eq(6)').text());
-    $("#txtDireccion").val(DatosFila.find('td:eq(7)').text());
-    $("#cboCiudad").val(DatosFila.find('td:eq(8)').text());
+    $("#btnTelefonos").prop('disabled', false);
+    $("#txtIdCliente").val(DatosFila.find('td:eq(1)').text());
+    $("#txtNombre").val(DatosFila.find('td:eq(2)').text());
+    $("#txtApellido").val(DatosFila.find('td:eq(3)').text());
+    $("#txtDireccion").val(DatosFila.find('td:eq(4)').text());
+    $("#txtEmail").val(DatosFila.find('td:eq(5)').text());   
+    $("#cboCiudad").val(DatosFila.find('td:eq(6)').text());
+    $("#cboGenero").val(DatosFila.find('td:eq(7)').text());
 }
 
-function LlenarComboUtils() {
-    $.ajax({
-        type: "POST",
-        url: "../Controladores/ControladorUtils.ashx",
-        contentType: "json",
-        data: null,
-        success: function (rpta) {
-            //Crear un objeto JSON con la información
-            rptaList = rpta.split(']');
-            DatosComboTpTelefono = JSON.parse(rptaList[0] + ']');
-            DatosComboGenero = JSON.parse(rptaList[1] + ']');
-            DatosComboCiudad = JSON.parse(rptaList[2] + ']');
-            
-            DatosComboCiudad.forEach(op => {
-                $("#cboCiudad").append(`<option value=${op.id_ciudad}>${op.descripcion}</option>`);
-            });+
-            DatosComboGenero.forEach(op => {
-                $("#cboGenero").append(`<option value=${op.genero1}>${op.descripcion}</option>`);
-            });
-            DatosComboTpTelefono.forEach(op => {
-                $("#cboTipoTel").append(`<option value=${op.id_tipo_tel}>${op.descripcion}</option>`);
-            });
-        },
-        error: function (errCliente) {
-            $("#dvMensaje").addClass("alert alert-danger");
-            $("#dvMensaje").html(errCliente);
-        }
-    });
-}
 
 function LlenarTablaClientes() {
-    let DatosCliente = {
-        id_cliente: 0,
-        nombre: "",
-        apellido: "",
-        email: "",
-        tipo_tel: 0,
-        telefono: 0,
-        genero: 0,
-        direccion: "",
-        ciudad: 0,
-        Comando: "LlenarGrid",
-    }
-    $.ajax({
-        type: "POST",
-        url: "../Controladores/ControladorClientes.ashx",
-        contentType: "json",
-        data: JSON.stringify(DatosCliente),
-        success: function (rpta) {
-            LlenarGrid_JSON(JSON.parse(rpta), "#tblClientes");
-        },
-        error: function (errRpta) {
-            $("#dvMensaje").addClass("alert alert-danger");
-            $("#dvMensaje").html(errRpta);
-        }
-    });
+    LlenaTablaServicio("http://localhost:51789/api/Cliente", "#tblClientes")
 }
 
+function LlenarComboGenero() {
+    LlenarComboServicio("http://localhost:51789/api/Genero", "#cboGenero", "", true);
+}
 
+function LlenarComboCiudad() {
+    LlenarComboServicio("http://localhost:51789/api/Ciudad", "#cboCiudad", "", true);
+}
    

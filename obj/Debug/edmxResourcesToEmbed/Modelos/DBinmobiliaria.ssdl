@@ -22,8 +22,6 @@
     <Property Name="nombre" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="apellido" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="email" Type="varchar" MaxLength="30" Nullable="false" />
-    <Property Name="tipo_tel" Type="int" Nullable="false" />
-    <Property Name="telefono" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="genero" Type="int" Nullable="false" />
     <Property Name="direccion" Type="varchar" MaxLength="30" Nullable="false" />
     <Property Name="ciudad" Type="varchar" MaxLength="30" Nullable="false" />
@@ -110,12 +108,32 @@
     <Property Name="id_Sede" Type="int" Nullable="false" />
     <Property Name="descripcion" Type="varchar" MaxLength="30" Nullable="false" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Telefono">
+    <Key>
+      <PropertyRef Name="id_tel" />
+    </Key>
+    <Property Name="id_tel" Type="int" Nullable="false" />
+    <Property Name="numero" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="cliente" Type="int" Nullable="false" />
+    <Property Name="tipo_telefono" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Tipo_Tel">
     <Key>
       <PropertyRef Name="id_tipo_tel" />
     </Key>
     <Property Name="id_tipo_tel" Type="int" Nullable="false" />
     <Property Name="descripcion" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TiposContrato">
     <Key>
@@ -131,6 +149,30 @@
     <Property Name="id_tipo_propiedad" Type="int" Nullable="false" />
     <Property Name="nombre" Type="varchar" MaxLength="30" Nullable="false" />
   </EntityType>
+  <Association Name="FK_Telefono_Clientes">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+    <End Role="Telefono" Type="Self.Telefono" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="id_cliente" />
+      </Principal>
+      <Dependent Role="Telefono">
+        <PropertyRef Name="cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Telefono_Tipo_Tel">
+    <End Role="Tipo_Tel" Type="Self.Tipo_Tel" Multiplicity="1" />
+    <End Role="Telefono" Type="Self.Telefono" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo_Tel">
+        <PropertyRef Name="id_tipo_tel" />
+      </Principal>
+      <Dependent Role="Telefono">
+        <PropertyRef Name="tipo_telefono" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="DBInmobiliariaModelStoreContainer">
     <EntitySet Name="Cargo" EntityType="Self.Cargo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
@@ -144,8 +186,18 @@
     <EntitySet Name="Genero" EntityType="Self.Genero" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Propiedades" EntityType="Self.Propiedades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Sede" EntityType="Self.Sede" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Telefono" EntityType="Self.Telefono" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tipo_Tel" EntityType="Self.Tipo_Tel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposContrato" EntityType="Self.TiposContrato" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposPropiedad" EntityType="Self.TiposPropiedad" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Telefono_Clientes" Association="Self.FK_Telefono_Clientes">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Telefono" EntitySet="Telefono" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Telefono_Tipo_Tel" Association="Self.FK_Telefono_Tipo_Tel">
+      <End Role="Tipo_Tel" EntitySet="Tipo_Tel" />
+      <End Role="Telefono" EntitySet="Telefono" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

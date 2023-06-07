@@ -148,23 +148,23 @@
     <Content Include="Controladores\ControladorSede.ashx" />
     <Content Include="Controladores\ControladorTipoContrato.ashx" />
     <Content Include="Controladores\ControladorTipoTelefono.ashx" />
-    <EntityDeploy Include="Modelos\DBinmobiliaria.edmx">
+    <EntityDeploy Include="Modelos\DBInmobiliaria.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DBinmobiliaria.Designer.cs</LastGenOutput>
+      <LastGenOutput>DBInmobiliaria.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Modelos\DBinmobiliaria.edmx.diagram">
-      <DependentUpon>DBinmobiliaria.edmx</DependentUpon>
+    <Content Include="Modelos\DBInmobiliaria.edmx.diagram">
+      <DependentUpon>DBInmobiliaria.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Modelos\DBinmobiliaria.Context.tt">
+    <Content Include="Modelos\DBInmobiliaria.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBinmobiliaria.edmx</DependentUpon>
-      <LastGenOutput>DBinmobiliaria.Context.cs</LastGenOutput>
+      <DependentUpon>DBInmobiliaria.edmx</DependentUpon>
+      <LastGenOutput>DBInmobiliaria.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Modelos\DBinmobiliaria.tt">
+    <Content Include="Modelos\DBInmobiliaria.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBinmobiliaria.edmx</DependentUpon>
-      <LastGenOutput>DBinmobiliaria.cs</LastGenOutput>
+      <DependentUpon>DBInmobiliaria.edmx</DependentUpon>
+      <LastGenOutput>DBInmobiliaria.cs</LastGenOutput>
     </Content>
     <Content Include="Paginas\Cliente.html" />
     <Content Include="Paginas\Empleados.html" />
@@ -181,6 +181,9 @@
     <Content Include="Paginas\Imagenes\IMG_3.jpg" />
     <Content Include="Paginas\PropiedadesWeb.html" />
     <Content Include="Paginas\Scripts\Cliente.js" />
+    <Content Include="Paginas\Scripts\Comunes\Combos.js" />
+    <Content Include="Paginas\Scripts\Comunes\FuncionesComunes.js" />
+    <Content Include="Paginas\Scripts\Comunes\Tablas.js" />
     <Content Include="Paginas\Scripts\Empleados.js" />
     <Content Include="Paginas\Scripts\Grids.js" />
     <Content Include="Paginas\Scripts\Propiedades.js" />
@@ -319,64 +322,70 @@
     </Compile>
     <Compile Include="Modelos\Base.cs" />
     <Compile Include="Modelos\Cargo.cs">
-      <DependentUpon>DBinmobiliaria.tt</DependentUpon>
+      <DependentUpon>DBInmobiliaria.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelos\Ciudad.cs">
-      <DependentUpon>DBinmobiliaria.tt</DependentUpon>
+      <DependentUpon>DBInmobiliaria.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelos\Cliente.cs">
-      <DependentUpon>DBinmobiliaria.tt</DependentUpon>
+      <DependentUpon>DBInmobiliaria.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelos\Comision.cs">
-      <DependentUpon>DBinmobiliaria.tt</DependentUpon>
+      <DependentUpon>DBInmobiliaria.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelos\ContratoPropiedad.cs">
-      <DependentUpon>DBinmobiliaria.tt</DependentUpon>
+      <DependentUpon>DBInmobiliaria.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelos\DBinmobiliaria.Context.cs">
+    <Compile Include="Modelos\DBInmobiliaria.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBinmobiliaria.Context.tt</DependentUpon>
+      <DependentUpon>DBInmobiliaria.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelos\DBinmobiliaria.cs">
+    <Compile Include="Modelos\DBInmobiliaria.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBinmobiliaria.tt</DependentUpon>
+      <DependentUpon>DBInmobiliaria.tt</DependentUpon>
     </Compile>
-    <Compile Include="Modelos\DBinmobiliaria.Designer.cs">
+    <Compile Include="Modelos\DBInmobiliaria.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBinmobiliaria.edmx</DependentUpon>
+      <DependentUpon>DBInmobiliaria.edmx</DependentUpon>
     </Compile>
     <Compile Include="Modelos\Departamento.cs">
-      <DependentUpon>DBinmobiliaria.tt</DependentUpon>
+      <DependentUpon>DBInmobiliaria.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelos\Empleado.cs">
-      <DependentUpon>DBinmobiliaria.tt</DependentUpon>
+      <DependentUpon>DBInmobiliaria.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelos\Estacionamiento.cs">
-      <DependentUpon>DBinmobiliaria.tt</DependentUpon>
+      <DependentUpon>DBInmobiliaria.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelos\EstadoPropiedad.cs">
-      <DependentUpon>DBinmobiliaria.tt</DependentUpon>
+      <DependentUpon>DBInmobiliaria.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelos\Genero.cs">
-      <DependentUpon>DBinmobiliaria.tt</DependentUpon>
+      <DependentUpon>DBInmobiliaria.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelos\Propiedade.cs">
-      <DependentUpon>DBinmobiliaria.tt</DependentUpon>
+      <DependentUpon>DBInmobiliaria.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelos\Sede.cs">
-      <DependentUpon>DBinmobiliaria.tt</DependentUpon>
+      <DependentUpon>DBInmobiliaria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelos\sysdiagram.cs">
+      <DependentUpon>DBInmobiliaria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelos\Telefono.cs">
+      <DependentUpon>DBInmobiliaria.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelos\TiposContrato.cs">
-      <DependentUpon>DBinmobiliaria.tt</DependentUpon>
+      <DependentUpon>DBInmobiliaria.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelos\TiposPropiedad.cs">
-      <DependentUpon>DBinmobiliaria.tt</DependentUpon>
+      <DependentUpon>DBInmobiliaria.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelos\Tipo_Tel.cs">
-      <DependentUpon>DBinmobiliaria.tt</DependentUpon>
+      <DependentUpon>DBInmobiliaria.tt</DependentUpon>
     </Compile>
     <Compile Include="Modelos\ViewGridEmpleado.cs" />
     <Compile Include="Modelos\viewGridPropiedades.cs" />
