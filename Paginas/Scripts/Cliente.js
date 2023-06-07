@@ -1,4 +1,5 @@
 ﻿var oTabla = $("#tblClientes").DataTable();
+var oTabla1 = $("#tblTelefonos").DataTable();
 $(document).ready(function () {
     $("#btnTelefonos").prop('disabled', true);
     $('#btnBuscar').click(function () {
@@ -13,20 +14,43 @@ $(document).ready(function () {
             EditarFila($(this).closest('tr'));
         }
     });
+    $('#tblTelefonos tbody').on('click', 'tr', function () {
+        if ($(this).hasClass('selected')) {
+            $(this).removeClass('selected');
+        } else {
+            oTabla1.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            EditarFilaTelefonos($(this).closest('tr'));
+        }
+    });
+
+    $("#bntInsertarTel").click(function () {
+        ProcesarTelefonos("Post");
+    });
+    $("#btnActualizarTel").click(function () {
+        ProcesarTelefonos("Put");
+    });
+    $("#btnEliminarTel").click(function () {
+        ProcesarTelefonos("Delete");
+    });
+
     $("#btnIngresar").click(function () {
         EjecutarComando("Post");
     });
    $("#btnActualizar").click(function () {
-        EjecutarComando("Actualizar");
+        EjecutarComando("Put");
     });
     $("#btnEliminar").click(function () {
-        EjecutarComando("Eliminar");
+        EjecutarComando("Delete");
     });
     $("#btnTelefonos").click(function () {
         //Invoca la página modal, y pasa el nombre del cliente
-        $("#txtNombre").val($("#txtApellido").val())
+        $("#txtNombre").val($("#txtNombre").val() + " " + $("#txtApellido").val())
         //Invoca la tabla para llenar los teléfonos del cliente
-        //LlenarTablaTelefonos();
+        LlenarTablaTelefonos();
+    });
+    $("#btnCerrarModal").click(function () {
+        LlenarTablaClientes();
     });
     //Invocar el llenado del combo
     //LlenarComboUtils();
@@ -90,6 +114,8 @@ function EjecutarComando(Comando) {
         dataType: "json",
         success: function (Rpta) {
             LlenarTablaClientes();
+            $("#dvMensaje").addClass("alert alert-success");
+            $("#dvMensaje").html(Rpta);
         },
         error: function (Error) {
             $("#dvMensaje").addClass("alert alert-danger");
@@ -112,6 +138,14 @@ function EditarFila(DatosFila) {
     $("#cboGenero").val(DatosFila.find('td:eq(7)').text());
 }
 
+function LlenarTablaTelefonos() {
+    //Limpia la tabla de telefonos
+    oTabla1.clear().draw(false);
+    let id_cliente = $("#txtIdCliente").val();
+    let sURL = "http://localhost:51789/api/Telefono?Documento=" + id_cliente;
+    LlenaTablaServicio(sURL, "#tblTelefonos");
+}
+
 
 function LlenarTablaClientes() {
     LlenaTablaServicio("http://localhost:51789/api/Cliente", "#tblClientes")
@@ -125,3 +159,4 @@ function LlenarComboCiudad() {
     LlenarComboServicio("http://localhost:51789/api/Ciudad", "#cboCiudad", "", true);
 }
    
+
