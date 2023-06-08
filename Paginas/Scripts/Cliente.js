@@ -44,16 +44,15 @@ $(document).ready(function () {
         EjecutarComando("Delete");
     });
     $("#btnTelefonos").click(function () {
+        console.log("HOLAAAAAA")
         //Invoca la página modal, y pasa el nombre del cliente
-        $("#txtNombre").val($("#txtNombre").val() + " " + $("#txtApellido").val())
+        $("#txtNombreCliente").val($("#txtNombre").val() + " " + $("#txtApellido").val());
         //Invoca la tabla para llenar los teléfonos del cliente
         LlenarTablaTelefonos();
     });
     $("#btnCerrarModal").click(function () {
         LlenarTablaClientes();
     });
-    //Invocar el llenado del combo
-    //LlenarComboUtils();
     //Invoca el llenado de la tabla
     LlenarTablaClientes();
     //Llenar el combo Ciudad
@@ -139,15 +138,17 @@ function EditarFila(DatosFila) {
 }
 
 function LlenarTablaTelefonos() {
+    console.log("LLENANDO TABLA TELEFONO");
     //Limpia la tabla de telefonos
-    oTabla1.clear().draw(false);
+    oTabla1.clear().draw(true);
     let id_cliente = $("#txtIdCliente").val();
-    let sURL = "http://localhost:51789/api/Telefono?Documento=" + id_cliente;
+    let sURL = "http://localhost:51789/api/Telefono?id_cliente=" + id_cliente;
     LlenaTablaServicio(sURL, "#tblTelefonos");
 }
 
 
 function LlenarTablaClientes() {
+    console.log("LLENANDO TABLA CLIENTE");
     LlenaTablaServicio("http://localhost:51789/api/Cliente", "#tblClientes")
 }
 
@@ -158,5 +159,35 @@ function LlenarComboGenero() {
 function LlenarComboCiudad() {
     LlenarComboServicio("http://localhost:51789/api/Ciudad", "#cboCiudad", "", true);
 }
-   
+
+function ProcesarTelefonos(Comando) {
+    event.preventDefault();
+
+    let id_tel = $("#txtCodigo").val();
+    let tipo_telefono = $("#cboTipoTelefono").val();
+    let numero = $("#txtNumero").val();
+    let cliente = $("#txtDocumento").val();
+
+    let DatosTelefono = {
+        id_tel: id_tel,
+        numero: numero,
+        cliente: cliente,
+        tipo_telefono: tipo_telefono
+    }
+
+    $.ajax({
+        type: Comando,
+        url: "http://localhost:51789/Api/Telefono",
+        contentType: "application/json",
+        data: JSON.stringify(DatosTelefono),
+        dataType: "json",
+        success: function (Rpta) {
+            LlenarTablaTelefonos();
+        },
+        error: function (Error) {
+            $("#dvMensaje").addClass("alert alert-danger");
+            $("#dvMensaje").html(Error);
+        }
+    });
+}
 
