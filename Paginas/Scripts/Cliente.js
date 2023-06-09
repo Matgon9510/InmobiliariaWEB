@@ -148,7 +148,6 @@ function LlenarTablaTelefonos() {
 
 
 function LlenarTablaClientes() {
-    console.log("LLENANDO TABLA CLIENTE");
     LlenaTablaServicio("http://localhost:51789/api/Cliente", "#tblClientes")
 }
 

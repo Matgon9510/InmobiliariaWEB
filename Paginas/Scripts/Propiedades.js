@@ -13,18 +13,18 @@ $(document).ready(function () {
         }
     });
     $("#bntInsertar").click(function () {
-        EjecutarComando("Insertar");
+        EjecutarComando("Post");
     });
     $("#btnActualizar").click(function () {
-        EjecutarComando("Actualizar");
+        EjecutarComando("Put");
     });
     $("#btnEliminar").click(function () {
-        EjecutarComando("Eliminar");
+        EjecutarComando("Delete");
     });
     //Invoca el llenado de la tabla
     LlenarComboCiudad();
     //Invocar el llenado del combo
-    LlenarComboPropiedad();
+    LlenarComboComision();
     //Invocar el llenado del combo
     LlenarComboDepartamento();
     //Invocar el llenado del combo
@@ -72,6 +72,7 @@ function Consultar() {
 }
 
 function EjecutarComando(Comando) {
+    event.preventDefault();
     let id_propiedad = $("#txtid_propiedad").val();
     let direccion = $("#txtDireccion").val();
     let ciudad = $("#cboCiudad").val();
@@ -83,7 +84,6 @@ function EjecutarComando(Comando) {
     let estado = $("#cboEstado").val();
     let tipo_contrato = $("#cboTipoContrato").val();
     let precio_inicial = $("#txtPrecioInicial").val();
-    let comision = $("#cboComision").val();
     let DatosPropiedad = {
         id_propiedad: id_propiedad,
         direccion: direccion,
@@ -96,24 +96,26 @@ function EjecutarComando(Comando) {
         estado: estado,
         tipo_contrato: tipo_contrato,
         precio_inicial: precio_inicial,
-        comision: comision,
+        comision: 0,
         precio_final: 0,
         Comando: Comando,
     }
     $.ajax({
-        type: "POST",
-        url: "../Controladores/ControladorPropiedad.ashx",
-        contentType: "json",
+        type: Comando,
+        url: "http://localhost:51789//api/Propiedad",
+        contentType: "application/json",
         data: JSON.stringify(DatosPropiedad),
-        success: function (rpta) {
-            $("#dvMensaje").addClass("alert alert-success");
-            $("#dvMensaje").html(rpta);
+        dataType: "json",
+        success: function (Rpta) {
             LlenarTablaPropiedades();
+            $("#dvMensaje").addClass("alert alert-success");
+            $("#dvMensaje").html(Rpta);
         },
-        error: function (errRpta) {
+        error: function (Error) {
             $("#dvMensaje").addClass("alert alert-danger");
-            $("#dvMensaje").html(errRpta);
+            $("#dvMensaje").html(Error);
         }
+
     });
 }
 function EditarFila(DatosFila) {
@@ -131,147 +133,39 @@ function EditarFila(DatosFila) {
     $("#cboComision").val(DatosFila.find('td:eq(11)').text());
     $("#txtPrecioFinal").val(DatosFila.find('td:eq(12)').text());
 }
-function LlenarComboPropiedad() {
-    $.ajax({
-        type: "POST",
-        url: "../Controladores/ControladorCombosPropiedad.ashx",
-        contentType: "json",
-        data: null,
-        success: function (rpta) {
-            //Crear un objeto JSON con la información
-            DatosCombo = JSON.parse(rpta);
-            for (let op = 0; op < rpta.length; op++) {
-                $("#cboComision").append('<option value=' + DatosCombo[op].id_comision + '>' + DatosCombo[op].descricion + '</options>');
-            }
-        },
-        error: function (errCliente) {
-            $("#dvMensaje").addClass("alert alert-danger");
-            $("#dvMensaje").html(errCliente);
-        }
-    });
-}
+
 
 function LlenarComboCiudad() {
-    $.ajax({
-        type: "POST",
-        url: "../Controladores/ControladorCiudad.ashx",
-        contentType: "json",
-        data: null,
-        success: function (rpta) {
-            //Crear un objeto JSON con la información
-            DatosCombo = JSON.parse(rpta);
-            for (let op = 0; op < rpta.length; op++) {
-                $("#cboCiudad").append('<option value=' + DatosCombo[op].id_ciudad + '>' + DatosCombo[op].descripcion + '</options>');
-            }
-        },
-        error: function (errCliente) {
-            $("#dvMensaje").addClass("alert alert-danger");
-            $("#dvMensaje").html(errCliente);
-        }
-    });
+    LlenarComboServicio("http://localhost:51789/api/Ciudad", "#cboCiudad", "", true);
 }
 
+
 function LlenarComboDepartamento() {
-    $.ajax({
-        type: "POST",
-        url: "../Controladores/ControladorDepartamento.ashx",
-        contentType: "json",
-        data: null,
-        success: function (rpta) {
-            //Crear un objeto JSON con la información
-            DatosCombo = JSON.parse(rpta);
-            for (let op = 0; op < rpta.length; op++) {
-                $("#cboDepartamento").append('<option value=' + DatosCombo[op].id_departamento + '>' + DatosCombo[op].descripcion + '</options>');
-            }
-        },
-        error: function (errCliente) {
-            $("#dvMensaje").addClass("alert alert-danger");
-            $("#dvMensaje").html(errCliente);
-        }
-    });
+    LlenarComboServicio("http://localhost:51789/api/Departamento", "#cboDepartamento", "", true);
 }
 
 function LlenarComboTipoPropiedad() {
-    $.ajax({
-        type: "POST",
-        url: "../Controladores/ControladorTipoPropiedad.ashx",
-        contentType: "json",
-        data: null,
-        success: function (rpta) {
-            //Crear un objeto JSON con la información
-            DatosCombo = JSON.parse(rpta);
-            for (let op = 0; op < rpta.length; op++) {
-                $("#cboTipoPropiedad").append('<option value=' + DatosCombo[op].id_tipo_propiedad + '>' + DatosCombo[op].nombre + '</options>');
-            }
-        },
-        error: function (errCliente) {
-            $("#dvMensaje").addClass("alert alert-danger");
-            $("#dvMensaje").html(errCliente);
-        }
-    });
+    LlenarComboServicio("http://localhost:51789/api/TipoPropiedad", "#cboTipoPropiedad", "", true);
 }
 
 
+
 function LlenarComboEstacionamiento() {
-    $.ajax({
-        type: "POST",
-        url: "../Controladores/ControladorEstacionamiento.ashx",
-        contentType: "json",
-        data: null,
-        success: function (rpta) {
-            //Crear un objeto JSON con la información
-            DatosCombo = JSON.parse(rpta);
-            for (let op = 0; op < rpta.length; op++) {
-                $("#cboEstacionamiento").append('<option value=' + DatosCombo[op].id_estacionamiento + '>' + DatosCombo[op].descripcion + '</options>');
-            }
-        },
-        error: function (errCliente) {
-            $("#dvMensaje").addClass("alert alert-danger");
-            $("#dvMensaje").html(errCliente);
-        }
-    });
+    LlenarComboServicio("http://localhost:51789/api/Estacionamiento", "#cboEstacionamiento", "", true);
 }
 
 
 function LlenarComboEstado() {
-    $.ajax({
-        type: "POST",
-        url: "../Controladores/ControladorEstado.ashx",
-        contentType: "json",
-        data: null,
-        success: function (rpta) {
-            //Crear un objeto JSON con la información
-            DatosCombo = JSON.parse(rpta);
-            for (let op = 0; op < rpta.length; op++) {
-                $("#cboEstado").append('<option value=' + DatosCombo[op].id_estado_propiedad + '>' + DatosCombo[op].descripcion + '</options>');
-            }
-        },
-        error: function (errCliente) {
-            $("#dvMensaje").addClass("alert alert-danger");
-            $("#dvMensaje").html(errCliente);
-        }
-    });
+    LlenarComboServicio("http://localhost:51789/api/Estado", "#cboEstado", "", true);
 }
 
 
 function LlenarComboTipoContrato() {
-    $.ajax({
-        type: "POST",
-        url: "../Controladores/ControladorTipoContratoProp.ashx",
-        contentType: "json",
-        data: null,
-        success: function (rpta) {
-            //Crear un objeto JSON con la información
-            DatosCombo = JSON.parse(rpta);
-            for (let op = 0; op < rpta.length; op++) {
-                $("#cboTipoContrato").append('<option value=' + DatosCombo[op].id_tipo_contrato + '>' + DatosCombo[op].nombre + '</options>');
-            }
-        },
-        error: function (errCliente) {
-            $("#dvMensaje").addClass("alert alert-danger");
-            $("#dvMensaje").html(errCliente);
-        }
-    });
+    LlenarComboServicio("http://localhost:51789/api/TipoContrato", "#cboTipoContrato", "", true);
+}
+
+function LlenarComboComision() {
+    LlenarComboServicio("http://localhost:51789/api/Comision", "#cboComision", "", true);
 }
 
 

@@ -12,7 +12,7 @@ namespace InmoviliariaWeb.Clases
     {
         DBInmobiliariaEntities dbInmobiliaria = new DBInmobiliariaEntities();
         public Propiedade propiedades = new Propiedade();
-        
+
         public List<Propiedade> LlenarGrid()
         {
             return dbInmobiliaria.Propiedades
@@ -35,7 +35,7 @@ namespace InmoviliariaWeb.Clases
 
                 Console.WriteLine(e);
             }
-            
+
             return "Se insertó la propiedad con ID: " + propiedades.id_propiedad;
         }
 
@@ -63,7 +63,7 @@ namespace InmoviliariaWeb.Clases
             propiedad_Actual.comision = propiedades.comision;
             propiedad_Actual.precio_final = propiedades.precio_final;
 
-            
+
             dbInmobiliaria.Entry(propiedad_Actual).State = EntityState.Modified;
             dbInmobiliaria.SaveChanges();
             return "Se actualizó la propiedad con identificacion: " + propiedades.id_propiedad;
@@ -88,7 +88,7 @@ namespace InmoviliariaWeb.Clases
             }
             else
             {
-                if (propiedades.precio_inicial > 800000 && propiedades.precio_inicial <= 1500000 )
+                if (propiedades.precio_inicial > 800000 && propiedades.precio_inicial <= 1500000)
                 {
                     propiedades.comision = 2;
                     ValorUnitario = 0.1;
